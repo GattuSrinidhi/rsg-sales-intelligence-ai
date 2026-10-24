@@ -1,0 +1,21 @@
+# RSG Sales Intelligence AI Assistant Dependencies
+
+# Backend Web Framework
+fastapi>=0.110.0,<1.0.0
+uvicorn[standard]>=0.29.0,<1.0.0
+
+# Data Validation & Modeling
+pydantic>=2.7.0,<3.0.0
+
+# Data Processing
+pandas>=2.2.0,<3.0.0
+
+# Official Google GenAI SDK (Runtime Gemini Integration)
+google-genai>=1.0.0
+
+# Environment Variable Management
+python-dotenv>=1.0.1
+
+# Automated Testing
+pytest>=8.1.0,<9.0.0
+httpx>=0.27.0,<1.0.0
