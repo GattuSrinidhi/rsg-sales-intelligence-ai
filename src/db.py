@@ -9,7 +9,7 @@ SCHEMA_SQL = """
 CREATE TABLE IF NOT EXISTS sales_transactions (
     transaction_id TEXT PRIMARY KEY,
     order_date_raw TEXT NOT NULL,
-    order_date TEXT NOT NULL,          -- Stored in ISO format YYYY-MM-DD for fast date filtering
+    order_date TEXT,                   -- Stored in ISO format YYYY-MM-DD (NULL if date is invalid)
     product TEXT NOT NULL,
     category TEXT NOT NULL,
     region TEXT NOT NULL,
