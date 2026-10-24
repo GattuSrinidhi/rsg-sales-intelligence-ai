@@ -2,7 +2,8 @@
  * RSG Sales Intelligence AI Assistant — Frontend Client Application
  * Connects to the FastAPI backend, coordinates query lifecycle, renders interactive UI and charts.
  */
-
+const API_BASE_URL =
+  window.location.port === "5500" ? "http://127.0.0.1:8001" : "";
 document.addEventListener("DOMContentLoaded", () => {
   // --- DOM Element References ---
   const statusDot = document.getElementById("statusDot");
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Initial System Health Check ---
   async function checkSystemHealth() {
     try {
-      const response = await fetch("/api/health");
+      const response = await fetch(`${API_BASE_URL}/api/health`);
       if (response.ok) {
         const data = await response.json();
         if (data.database_connected) {
@@ -94,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setLoadingState(true);
 
     try {
-      const response = await fetch("/api/query", {
+      const response = await fetch(`${API_BASE_URL}/api/query`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
