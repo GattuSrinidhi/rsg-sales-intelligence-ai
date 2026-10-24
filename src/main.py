@@ -21,8 +21,8 @@ import uvicorn
 from src.agent import AgentResponse, process_query
 import src.analytics as analytics
 from src.config import DB_PATH, GEMINI_API_KEY, FRONTEND_DIR
-from src.db import execute_read_query, init_db
-
+from src.db import execute_read_query
+from src.import_data import import_sales_data
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -34,16 +34,15 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Initialize the database schema when the application starts."""
+    """Initialize the database and import sales data on startup."""
     try:
-        init_db()
-        logger.info("Database schema verified on startup.")
+        result = import_sales_data()
+        logger.info("Sales data import completed: %s", result)
     except Exception:
-        logger.exception("Failed to initialize database on startup.")
+        logger.exception("Failed to initialize or import sales data.")
         raise
 
     yield
-
 
 # --- 2. FastAPI Application ---
 
