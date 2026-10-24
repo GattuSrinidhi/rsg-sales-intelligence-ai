@@ -53,6 +53,8 @@ app = FastAPI(
 ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
+    "http://localhost:8001",
+    "http://127.0.0.1:8001",
     "http://localhost:3000",
     "http://127.0.0.1:5500",
     "http://localhost:5500",
@@ -260,6 +262,14 @@ async def api_revenue_delta(month_a: str, month_b: str):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(err)
         )
+
+# --- 7. Static Frontend Dashboard Mounting ---
+
+from fastapi.staticfiles import StaticFiles
+from src.config import FRONTEND_DIR
+
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
 
 if __name__ == "__main__":
     import uvicorn

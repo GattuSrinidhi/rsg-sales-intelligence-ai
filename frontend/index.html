@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RSG Sales Intelligence AI Assistant — Vectorless RAG business intelligence dashboard for querying transactional sales data.">
+  <title>RSG Sales Intelligence AI Assistant</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <!-- Header Component -->
+  <header class="header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">📊</div>
+        <div>
+          <h1 class="brand-title">RSG Sales Intelligence AI Assistant</h1>
+          <p class="brand-subtitle">Vectorless RAG Business Intelligence for Sales Transactions</p>
+        </div>
+      </div>
+      <div class="status-badge" aria-live="polite">
+        <span class="status-dot" id="statusDot" aria-hidden="true"></span>
+        <span id="statusText">Connecting...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Content -->
+  <main class="main-wrapper">
+    <!-- Natural Language Query Section -->
+    <section class="query-card" aria-label="Question Input">
+      <div class="query-card-header">
+        <h2 class="query-card-title">
+          <span>💬</span> Ask a Natural Language Sales Question
+        </h2>
+      </div>
+
+      <!-- Suggested Question Chips (Official 5 Questions) -->
+      <div class="chips-label">Official Challenge Example Questions:</div>
+      <div class="chips-grid" role="group" aria-label="Suggested business questions">
+        <button type="button" class="chip-btn" data-prompt="What is the total revenue?">
+          <span>💰</span> Total Revenue
+        </button>
+        <button type="button" class="chip-btn" data-prompt="Which product generated the highest revenue?">
+          <span>🏆</span> Top Product
+        </button>
+        <button type="button" class="chip-btn" data-prompt="What is the monthly revenue trend?">
+          <span>📈</span> Monthly Trend
+        </button>
+        <button type="button" class="chip-btn" data-prompt="Which region generated the highest sales?">
+          <span>🌍</span> Highest Sales Region
+        </button>
+        <button type="button" class="chip-btn" data-prompt="How did revenue change between April and May?">
+          <span>📊</span> Revenue Change (Apr vs May)
+        </button>
+      </div>
+
+      <!-- Input Form -->
+      <form class="input-form" id="queryForm">
+        <div class="input-row">
+          <input
+            type="text"
+            id="queryInput"
+            class="query-input"
+            placeholder="Ask a question about sales data (e.g. 'What is the total revenue?' or 'Which region sold the most units?')..."
+            maxlength="500"
+            autocomplete="off"
+            required
+            aria-label="Sales question input"
+          />
+          <button type="submit" id="submitBtn" class="submit-btn" aria-label="Submit question">
+            <span class="spinner" id="btnSpinner" aria-hidden="true"></span>
+            <span id="btnText">Ask Assistant</span>
+          </button>
+        </div>
+        <div class="input-footer">
+          <span>Tip: Press Enter ↵ to submit instantly</span>
+          <span id="charCounter">0/500</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Response Display Area -->
+    <section class="results-container" id="resultsContainer" aria-label="Query results">
+      <!-- Empty Initial State -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-state-icon" aria-hidden="true">🤖</div>
+        <h3 class="empty-state-title">Ready to Analyze Sales Transactions</h3>
+        <p class="empty-state-text">
+          Select one of the official example questions above or type your own question in natural language.
+          All answers are grounded in deterministic database queries with zero hallucination.
+        </p>
+        <span class="scope-pill">
+          <span>📁</span> Scope: H1 2026 Sales Dataset (51 transactions • Jan 3 – Jun 28, 2026)
+        </span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Component -->
+  <footer class="footer">
+    <p>
+      <strong>RSG Sales Intelligence AI Assistant</strong> • Official AI-Assisted Development Challenge for GET Selection
+    </p>
+    <p style="margin-top: 0.25rem; font-size: 0.75rem; color: var(--text-muted);">
+      Vectorless RAG Architecture • Deterministic SQLite Aggregation • FastAPI Backend
+    </p>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>

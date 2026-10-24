@@ -217,3 +217,27 @@ def test_unhandled_internal_error_safety(mock_process):
     assert "Simulated internal database" not in data["error"]
     assert "Traceback" not in data["error"]
     assert "C:\\" not in data["error"]
+
+# --- 8. Frontend Static Files Serving Tests ---
+
+def test_frontend_index_served():
+    """Verify that root / returns the frontend dashboard HTML."""
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "text/html" in response.headers.get("content-type", "")
+    assert "RSG Sales Intelligence AI Assistant" in response.text
+    assert "queryForm" in response.text
+
+def test_frontend_styles_served():
+    """Verify that /styles.css is served successfully."""
+    response = client.get("/styles.css")
+    assert response.status_code == 200
+    assert "text/css" in response.headers.get("content-type", "")
+    assert "--bg-primary" in response.text
+
+def test_frontend_script_served():
+    """Verify that /app.js is served successfully."""
+    response = client.get("/app.js")
+    assert response.status_code == 200
+    assert "javascript" in response.headers.get("content-type", "")
+    assert "checkSystemHealth" in response.text
